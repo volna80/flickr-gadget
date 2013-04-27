@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs title="LaTeX gadget" title_url="https://github.com/rizzoma/latex-gadget" author="Nikolay Volnov" author_email="nikolay.volnov@gmail.com">
+        <Require feature="wave" />
+        <Require feature="dynamic-height" />
+    </ModulePrefs>
+    <Content type="html">
+        <![CDATA[
+        <!DOCTYPE html>
+        <html>
+            <style>
+                * {
+                    padding: 0;
+                    margin: 0;
+                }
+
+                body {
+                    padding: 3px;
+                }
+
+                .content {
+                    cursor: pointer;
+                }
+            </style>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+            <script>
+
+            </script>
+            <body>
+                Hello, there will be a flickr gadget soon.
+            </body>
+        </html>
+    ]]>
+    </Content>
+</Module>
