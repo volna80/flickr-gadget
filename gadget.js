@@ -113,7 +113,6 @@ function reset(){
     $("#go").show();
 }
 
-
 gadgets.util.registerOnLoadHandler(function() {
     if (!wave || !wave.isInWaveContainer()) {
         return;

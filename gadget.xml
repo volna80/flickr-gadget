@@ -23,7 +23,7 @@
                 }
             </style>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-            <script src="https://github.com/volna80/flickr-gadget/blob/master/gadget.js"></script>
+            <script src="https://raw.github.com/volna80/flickr-gadget/master/gadget.js"></script>
           <body>
                <div id="loading" style="display:none">Loading ...</div>
                <select id="sets" style="display:none" />
