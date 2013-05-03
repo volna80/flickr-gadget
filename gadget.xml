@@ -25,11 +25,22 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
             <script src="https://raw.github.com/volna80/flickr-gadget/master/gadget.js"></script>
           <body>
-               <div id="loading" style="display:none">Loading ...</div>
-               <select id="sets" style="display:none" />
-               <input id="username" value="" />
-               <button id="go" >add</button>
-               <img id="img_placeholder" />
+
+    <table>
+      <tr>
+        <td width="50%">
+          <img id="img_placeholder" />
+        </td>
+        <td>
+          <table>
+            <tr><td><input id="username" value="" /></td></tr>
+            <tr><td><select id="sets" /><br/></td></tr>
+            <tr><td><button id="go" >add</button></td></tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
            </body>
         </html>
     ]]>

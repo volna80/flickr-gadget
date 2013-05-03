@@ -1,37 +1,59 @@
-var flickerAPI = "http://api.flickr.com/services/rest/?";
- var api_key = "1cddd65ff3197c08d166f62ca3722cc6";
+var Flickr = function (api_key){
+    this.api_key = api_key;
+    this.flickerAPI = "http://api.flickr.com/services/rest/?";
+};
 
- var user_id;
- var username;
 
-
-function getPhotos(photoset_id, callback){
-   $.getJSON( flickerAPI, {
+Flickr.prototype.getPhotos = function (photoset_id, callback){
+   $.getJSON( this.flickerAPI, {
     method: "flickr.photosets.getPhotos",
     photoset_id: photoset_id,
     per_page : 1,
     format: "json",
-    api_key: api_key,
+    api_key: this.api_key,
     nojsoncallback : 1
   }, callback);
-}
+};
+
+
+Flickr.prototype.getListOfSets = function(user_id, callback) {
+   $.getJSON( this.flickerAPI, {
+    method: "flickr.photosets.getList",
+     user_id: user_id,
+    format: "json",
+    api_key: this.api_key,
+    nojsoncallback : 1
+  }, callback);
+};
+
+Flickr.prototype.lookupUser = function(url, callback){
+  $.getJSON( this.flickerAPI, {
+    method: "flickr.urls.lookupUser",
+    url: url,
+    format: "json",
+    api_key: this.api_key,
+    nojsoncallback : 1
+  }, callback);
+};
+
+Flickr.prototype.buildImgUrl = function(photo){
+  //http://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg
+  return "http://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_s.jpg";
+};
+
 
 function userResponse(rsp){
   if(rsp.stat == "ok"){
-    user_id = rsp.user.id;
-    username = rsp.user.username._content;
-    flickrGetListOfSets(user_id, listOfSetsResponse);
+    var user_id = rsp.user.id;
+    flickr.getListOfSets(user_id, listOfSetsResponse);
   } else {
     alert("couldn't find a user");
-    $("#username").show();
-    reset();
     console.error(rsp);
   }
 }
 
 function listOfSetsResponse(rsp){
   if(rsp.stat == "ok"){
-
 
     $("#sets").html("");
 
@@ -40,55 +62,17 @@ function listOfSetsResponse(rsp){
       var photoset_title = rsp.photosets.photoset[i].title._content;
       $("#sets").append('<option value="' + photoset_id + '">' + photoset_title + '</option>');
     }
-    $("#sets").show();
-    $("#loading").hide();
 
   } else {
     alert("unexpected error happened");
-    reset();
     console.error(rsp);
   }
-}
-
-function lookupUser(url, callback){
-  $.getJSON( flickerAPI, {
-    method: "flickr.urls.lookupUser",
-    url: url,
-    format: "json",
-    api_key: api_key,
-    nojsoncallback : 1
-  }, callback);
-}
-
-function flickrGetListOfSets(user_id, callback) {
-   $.getJSON( flickerAPI, {
-    method: "flickr.photosets.getList",
-     user_id: user_id,
-    format: "json",
-    api_key: api_key,
-    nojsoncallback : 1
-  }, callback);
-}
-
-function flickrGetSetPhotos(photoset_id, callback){
-   $.getJSON( flickerAPI, {
-    method: "flickr.photosets.getPhotos",
-     photoset_id: photoset_id,
-    format: "json",
-    api_key: api_key,
-    nojsoncallback : 1
-  }, callback);
-}
-
-function buildImgUrl(photo){
-  //http://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg
-  return "http://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_s.jpg";
 }
 
 function setPhotosResponse(rsp){
   if(rsp.stat == "ok"){
     photo_1 = rsp.photoset.photo[0];
-    var imgUrl = buildImgUrl(photo_1);
+    var imgUrl = flickr.buildImgUrl(photo_1);
     console.log(imgUrl);
     $("#img_placeholder").attr("src", imgUrl);
 
@@ -97,35 +81,27 @@ function setPhotosResponse(rsp){
   }
 }
 
-$( document ).ready(function() {
+var flickr = new Flickr("1cddd65ff3197c08d166f62ca3722cc6");
 
+function init(){
 
-});
+  $("#go").click(function() {
+     flickr.lookupUser($("#username").attr("value"),userResponse);
+  });
 
-
-  function showLoading(){
-    $("#go").hide();
-    $("#loading").show();
-  }
-
-function reset(){
-  $("#loading").hide();
-    $("#go").show();
+  $("#sets").change(function(){
+    photoset_id = $("#sets").val();
+    flickr.getPhotos(photoset_id, setPhotosResponse);
+  });
 }
+
+$( document ).ready(function() {
+  init();
+});
 
 gadgets.util.registerOnLoadHandler(function() {
     if (!wave || !wave.isInWaveContainer()) {
         return;
     }
-  $("#go").click(function() {
-     lookupUser($("#username").attr("value"),userResponse);
-     $("#username").hide();
-     showLoading();
-  });
-
-  $("#sets").change(function(){
-    photoset_id = $("#sets").val();
-    console.log(photoset_id);
-    flickrGetSetPhotos(photoset_id, setPhotosResponse);
-  });
+    init();
 });
