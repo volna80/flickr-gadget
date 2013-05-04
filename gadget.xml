@@ -33,7 +33,7 @@
           <img id="img_placeholder" />
         </td>
         <td>
-          <table id="form">
+          <table id="form" style="display:none;">
             <tr><td>profile URL</td><td><input id="username" value="" /></td></tr>
             <tr><td>flickr set</td><td><select id="sets" /><br/></td></tr>
             <tr>

@@ -185,7 +185,7 @@ function init(){
     $("#form").fadeOut();
 
     var state = wave.getState();
-    state.sumbitDelta({photoset_id: photoset_id});
+    state.submitDelta({photoset_id: photoset_id});
     state.submitDelta({photo:photo});
     state.submitDelta({size:size});
     state.submitDelta({mode:mode});
@@ -202,15 +202,22 @@ gadgets.util.registerOnLoadHandler(function() {
     if (!wave || !wave.isInWaveContainer()) {
         return;
     }
-    init();
 
     console.log(wave.getState());
 
     if(wave.getState().get('photo') != null){
+
+      $("#form").hide();
+
       photo = wave.getState().get('photo');
       photoset_id = wave.getState().get("photoset_id");
       size = wave.getState().get("size");
       mode = wave.getState().get("mode");
       recalc();
+    } else {
+
+      $("#form").show();
+
+      init();
     }
 });
