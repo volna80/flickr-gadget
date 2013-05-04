@@ -205,7 +205,7 @@ gadgets.util.registerOnLoadHandler(function() {
 
     console.log(wave.getState());
 
-    if(wave.getState().get('photo') != null){
+    if(wave.getState() != null && wave.getState().get('photo') != null){
 
       $("#form").hide();
 
