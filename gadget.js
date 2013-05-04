@@ -186,7 +186,10 @@ function init(){
 
     var state = wave.getState();
     state.submitDelta({photoset_id: photoset_id});
-    state.submitDelta({photo:photo});
+    state.submitDelta({photo_farm:photo.farm});
+    state.submitDelta({photo_server:photo.server});
+    state.submitDelta({photo_id:photo.id});
+    state.submitDelta({photo_secret:photo.secret});
     state.submitDelta({size:size});
     state.submitDelta({mode:mode});
   });
@@ -205,11 +208,15 @@ gadgets.util.registerOnLoadHandler(function() {
 
     console.log(wave.getState());
 
-    if(wave.getState() != null && wave.getState().get('photo') != null){
+    if(wave.getState() != null && wave.getState().get('photo_id') != null){
 
       $("#form").hide();
 
-      photo = wave.getState().get('photo');
+      photo = new Object();
+      photo.id = wave.getState().get('photo_id');
+      photo.farm = wave.getState().get('photo_farm');
+      photo.server = wave.getState().get('photo_server');
+      photo.secret = wave.getState().get('photo_secret');
       photoset_id = wave.getState().get("photoset_id");
       size = wave.getState().get("size");
       mode = wave.getState().get("mode");
