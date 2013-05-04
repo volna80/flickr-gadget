@@ -4,12 +4,13 @@ var Flickr = function (api_key){
 };
 
 
-Flickr.prototype.getPhotos = function (photoset_id, callback){
+Flickr.prototype.getPhotos = function (photoset_id, page, callback){
    $.getJSON( this.flickerAPI, {
     method: "flickr.photosets.getPhotos",
     photoset_id: photoset_id,
     per_page : 1,
     format: "json",
+    page: page,
     api_key: this.api_key,
     nojsoncallback : 1
   }, callback);
@@ -36,18 +37,30 @@ Flickr.prototype.lookupUser = function(url, callback){
   }, callback);
 };
 
-Flickr.prototype.buildImgUrl = function(photo){
+Flickr.prototype.buildImgUrl = function(photo, size){
   //http://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg
-  return "http://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_s.jpg";
+  return "http://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_" + size + ".jpg";
 };
+
+
+//===========================================================================
+//===========================================================================
+//===========================================================================
+
+
+var photo;
+var photoset_id;
+var mode;
+var size;
 
 
 function userResponse(rsp){
   if(rsp.stat == "ok"){
     var user_id = rsp.user.id;
+    console.log("user_id" + user_id);
     flickr.getListOfSets(user_id, listOfSetsResponse);
   } else {
-    alert("couldn't find a user");
+    alert("couldn't look up an user");
     console.error(rsp);
   }
 }
@@ -58,10 +71,13 @@ function listOfSetsResponse(rsp){
     $("#sets").html("");
 
     for(i = 0; i < rsp.photosets.photoset.length; i++){
-      var photoset_id = rsp.photosets.photoset[i].id;
-      var photoset_title = rsp.photosets.photoset[i].title._content;
-      $("#sets").append('<option value="' + photoset_id + '">' + photoset_title + '</option>');
+      var _photoset_id = rsp.photosets.photoset[i].id;
+      var _photoset_title = rsp.photosets.photoset[i].title._content;
+      $("#sets").append('<option value="' + _photoset_id + '">' + _photoset_title + '</option>');
     }
+
+    photoset_id = $("#sets").val();
+    recalc();
 
   } else {
     alert("unexpected error happened");
@@ -69,31 +85,101 @@ function listOfSetsResponse(rsp){
   }
 }
 
-function setPhotosResponse(rsp){
+
+function firstPhotos(rsp){
   if(rsp.stat == "ok"){
-    photo_1 = rsp.photoset.photo[0];
-    var imgUrl = flickr.buildImgUrl(photo_1);
-    console.log(imgUrl);
-    $("#img_placeholder").attr("src", imgUrl);
+    photo = rsp.photoset.photo[0];
+    refreshImage();
+  } else {
+    console.error(rsp);
+  }
+}
+
+function lastPhotos(rsp){
+  if(rsp.stat == "ok"){
+
+    if(rsp.photoset.pages == 1){
+      //small set
+      photo = rsp.photoset.photo[rsp.photoset.photo.length - 1];
+      refreshImage();
+    } else {
+      if(rsp.photoset.page == 1) {
+        //request last page
+        flickr.getPhotos(photoset_id, rsp.photoset.pages, lastPhotos);
+      } else {
+        //it should be the latest page
+        photo = rsp.photoset.photo[rsp.photoset.photo.length - 1];
+        refreshImage();
+      }
+    }
+  } else {
+    console.error(rsp);
+  }
+}
+
+function randomPhotos(rsp){
+  if(rsp.stat == "ok"){
+
+    var pages = rsp.photoset.pages;
+
+    if(rsp.photoset.page == 1){
+      //I know, we never will show first photo in random mode
+      flickr.getPhotos(photoset_id, (Math.random() * pages) % pages, randomPhotos);
+    } else {
+      photo = rsp.photoset.photo[0];
+      refreshImage();
+    }
 
   } else {
     console.error(rsp);
   }
 }
 
+function refreshImage(){
+  var imgUrl = flickr.buildImgUrl(photo, size);
+  console.log(imgUrl);
+  $("#img_placeholder").attr("src", imgUrl);
+}
+
+function recalc(){
+    flickr.getPhotos(photoset_id, 1, function(rsp){
+        window[mode](rsp);
+    });
+  }
+
+
 var flickr = new Flickr("1cddd65ff3197c08d166f62ca3722cc6");
 
 function init(){
 
-  $("#go").click(function() {
+  size = $("#photo_size").val();
+  mode = $("#mode").val();
+
+  $("#username").change(function() {
      flickr.lookupUser($("#username").attr("value"),userResponse);
   });
 
   $("#sets").change(function(){
     photoset_id = $("#sets").val();
-    flickr.getPhotos(photoset_id, setPhotosResponse);
+    recalc();
   });
+
+  $("#photo_size").change(function(){
+    size = $("#photo_size").val();
+    refreshImage();
+  });
+
+  $("#mode").change(function(){
+    mode = $("#mode").val();
+    recalc();
+  });
+
+  $("#save").click(function(){
+    $("#form").fadeOut();
+  });
+
 }
+
 
 $( document ).ready(function() {
   init();

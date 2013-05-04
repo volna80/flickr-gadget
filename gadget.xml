@@ -26,22 +26,49 @@
             <script src="https://raw.github.com/volna80/flickr-gadget/master/gadget.js"></script>
           <body>
 
-    <table width="100%">
+
+<table width="100%">
       <tr>
         <td width="50%">
           <img id="img_placeholder" />
         </td>
         <td>
-          <table>
-            <tr><td><input id="username" value="" /></td></tr>
-            <tr><td><select id="sets" /><br/></td></tr>
-            <tr><td><button id="go" >add</button></td></tr>
+          <table id="form">
+            <tr><td>profile URL</td><td><input id="username" value="" /></td></tr>
+            <tr><td>flickr set</td><td><select id="sets" /><br/></td></tr>
+            <tr>
+              <td>size</td>
+              <td><select id="photo_size">
+                <option value="s">small square (75x75)</option>
+                <option value="q">large square (150x150)</option>
+                <option value="t">thumbnail, (100) </option>
+                <option value="m">small (240) </option>
+                <option value="n">small (320)</option>
+                <option value="z">medium (640)</option>
+                <option value="c">medium (800)</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td>mode</td>
+              <td>
+                <select id="mode">
+                  <option value="firstPhotos">first in set</option>
+                  <option value="lastPhotos">last in set</option>
+                  <option value="randomPhotos">random</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" align="right">
+                <button id="save" >save</button>
+              </td>
+            </tr>
           </table>
         </td>
       </tr>
-      <tr>
-        <td colspan="2" align="right">v.0.2</td>
-      </tr>
+     <tr>
+       <td colspan="2" align="right">v.0.3</td>
+     </tr>
     </table>
 
            </body>
