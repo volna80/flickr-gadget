@@ -216,7 +216,7 @@ gadgets.util.registerOnLoadHandler(function() {
     });
 
     console.log(wave.getState());
-                                                       .
+
     if(wave.getState() != null && wave.getState().get('photo_id') != null){
 
       photo = new Object();
