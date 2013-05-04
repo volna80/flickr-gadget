@@ -186,8 +186,7 @@ function init(){
 
     var state = wave.getState();
 
-
-    state.submitDelta(set:true);
+    state.submitDelta(set:"true");
     state.submitDelta({photoset_id: photoset_id});
     state.submitDelta({photo_farm:photo.farm});
     state.submitDelta({photo_server:photo.server});
@@ -212,8 +211,6 @@ gadgets.util.registerOnLoadHandler(function() {
     console.log(wave.getState());
 
     if(wave.getState() != null && wave.getState().get('photo_id') != null){
-
-      $("#form").hide();
 
       photo = new Object();
       photo.id = wave.getState().get('photo_id');
