@@ -186,7 +186,7 @@ function init(){
 
     var state = wave.getState();
 
-    state.submitDelta(set:"true");
+    state.submitDelta({set:"true"});
     state.submitDelta({photoset_id: photoset_id});
     state.submitDelta({photo_farm:photo.farm});
     state.submitDelta({photo_server:photo.server});
