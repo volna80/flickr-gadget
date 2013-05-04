@@ -185,6 +185,9 @@ function init(){
     $("#form").fadeOut();
 
     var state = wave.getState();
+
+
+    state.submitDelta(set:true);
     state.submitDelta({photoset_id: photoset_id});
     state.submitDelta({photo_farm:photo.farm});
     state.submitDelta({photo_server:photo.server});
@@ -221,6 +224,7 @@ gadgets.util.registerOnLoadHandler(function() {
       size = wave.getState().get("size");
       mode = wave.getState().get("mode");
       recalc();
+
     } else {
 
       $("#form").show();
