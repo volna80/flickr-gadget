@@ -186,6 +186,8 @@ function init(){
 
     var state = wave.getState();
 
+    console.log("save to " + state);
+
     state.submitDelta({set:"true"});
     state.submitDelta({photoset_id: photoset_id});
     state.submitDelta({photo_farm:photo.farm});
@@ -208,8 +210,13 @@ gadgets.util.registerOnLoadHandler(function() {
         return;
     }
 
-    console.log(wave.getState());
+    wave.setStateCallback(function() {
+      var state = wave.getState();
+      console.log("photo_id" + state.get("photo_id"));
+    });
 
+    console.log(wave.getState());
+                                                       .
     if(wave.getState() != null && wave.getState().get('photo_id') != null){
 
       photo = new Object();
