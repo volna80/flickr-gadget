@@ -79,6 +79,8 @@ function listOfSetsResponse(rsp){
     photoset_id = $("#sets").val();
     recalc();
 
+    $("#save").removeAttr("disabled");
+
   } else {
     alert("unexpected error happened");
     console.error(rsp);

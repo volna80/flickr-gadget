@@ -33,11 +33,11 @@
           <img id="img_placeholder" />
         </td>
         <td>
-          <table id="form" style="display:none;">
-            <tr><td title="The url to the user's profile or photos page.">user's profile url</td><td><input id="username" value="" /></td></tr>
-            <tr><td>user's photoset</td><td><select id="sets" /><br/></td></tr>
-            <tr>
-              <td title="photo size">size</td>
+          <table id="form" >
+            <tr title="The url to the user's profile or photos page."><td>user's profile url : </td><td><input id="username" value="" /></td></tr>
+            <tr title="choose user's photoset"><td>user's photoset : </td><td><select id="sets" /><br/></td></tr>
+            <tr title="choose a photo size">
+              <td >size of a photo : </td>
               <td><select id="photo_size">
                 <option value="s">small square (75x75)</option>
                 <option value="q">large square (150x150)</option>
@@ -49,27 +49,29 @@
               </select></td>
             </tr>
             <tr>
-              <td>mode</td>
+              <td title="set how a gadget will show photos from the photoset">mode : </td>
               <td>
                 <select id="mode">
-                  <option value="firstPhotos" title="the gadget will show first photo from the photoset">first in set</option>
-                  <option value="lastPhotos" title="the gadget will show latest photo from the photoset">last in set</option>
+                  <option value="firstPhotos" title="the gadget will show a first photo from the photoset">first in set</option>
+                  <option value="lastPhotos" title="the gadget will show a latest photo from the photoset">last in set</option>
                   <option value="randomPhotos" title="the gadget will show a random photo from the photoset" >random</option>
                 </select>
               </td>
             </tr>
             <tr>
               <td colspan="2" align="right">
-                <button id="save" >save</button>
+                <button id="save" title="finish editing and save gadget parameters" disabled=true>save</button>
               </td>
             </tr>
             <tr>
-              <td colspan="2" align="right">v.0.3</td>
+              <td colspan="2" align="right" style="font-size:8pt;">v.1.0</td>
             </tr>
           </table>
         </td>
       </tr>
     </table>
+
+
 
            </body>
         </html>
