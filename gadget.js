@@ -139,6 +139,12 @@ function refreshImage(){
   var imgUrl = flickr.buildImgUrl(photo, size);
   console.log(imgUrl);
   $("#img_placeholder").attr("src", imgUrl);
+
+  //up
+  $("#img_placeholder").load(function(){
+      gadgets.window.adjustHeight();
+    });
+
 }
 
 function recalc(){
