@@ -212,27 +212,25 @@ gadgets.util.registerOnLoadHandler(function() {
 
     wave.setStateCallback(function() {
       var state = wave.getState();
-      console.log("photo_id" + state.get("photo_id"));
+
+      if(state.get('photo_id') != null){
+
+        photo = new Object();
+        photo.id        = state.get('photo_id');
+        photo.farm      = state.get('photo_farm');
+        photo.server    = state.get('photo_server');
+        photo.secret    = state.get('photo_secret');
+        photoset_id     = state.get("photoset_id");
+        size            = state.get("size");
+        mode            = state.get("mode");
+        recalc();
+
+      } else {
+        $("#form").show();
+        init();
+      }
+
     });
 
-    console.log(wave.getState());
 
-    if(wave.getState() != null && wave.getState().get('photo_id') != null){
-
-      photo = new Object();
-      photo.id = wave.getState().get('photo_id');
-      photo.farm = wave.getState().get('photo_farm');
-      photo.server = wave.getState().get('photo_server');
-      photo.secret = wave.getState().get('photo_secret');
-      photoset_id = wave.getState().get("photoset_id");
-      size = wave.getState().get("size");
-      mode = wave.getState().get("mode");
-      recalc();
-
-    } else {
-
-      $("#form").show();
-
-      init();
-    }
 });
