@@ -181,7 +181,14 @@ function init(){
   });
 
   $("#save").click(function(){
+
     $("#form").fadeOut();
+
+    var state = wave.getState();
+    state.sumbitDelta({photoset_id: photoset_id});
+    state.submitDelta({photo:photo});
+    state.submitDelta({size:size});
+    state.submitDelta({mode:mode});
   });
 
 }
@@ -196,4 +203,14 @@ gadgets.util.registerOnLoadHandler(function() {
         return;
     }
     init();
+
+    console.log(wave.getState());
+
+    if(wave.getState().get('photo') != null){
+      photo = wave.getState().get('photo');
+      photoset_id = wave.getState().get("photoset_id");
+      size = wave.getState().get("size");
+      mode = wave.getState().get("mode");
+      recalc();
+    }
 });

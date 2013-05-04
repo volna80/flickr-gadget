@@ -63,12 +63,12 @@
                 <button id="save" >save</button>
               </td>
             </tr>
+            <tr>
+              <td colspan="2" align="right">v.0.3</td>
+            </tr>
           </table>
         </td>
       </tr>
-     <tr>
-       <td colspan="2" align="right">v.0.3</td>
-     </tr>
     </table>
 
            </body>
