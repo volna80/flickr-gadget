@@ -34,10 +34,10 @@
         </td>
         <td>
           <table id="form" style="display:none;">
-            <tr><td>profile URL</td><td><input id="username" value="" /></td></tr>
-            <tr><td>flickr set</td><td><select id="sets" /><br/></td></tr>
+            <tr><td title="The url to the user's profile or photos page.">user's profile url</td><td><input id="username" value="" /></td></tr>
+            <tr><td>user's photoset</td><td><select id="sets" /><br/></td></tr>
             <tr>
-              <td>size</td>
+              <td title="photo size">size</td>
               <td><select id="photo_size">
                 <option value="s">small square (75x75)</option>
                 <option value="q">large square (150x150)</option>
@@ -52,9 +52,9 @@
               <td>mode</td>
               <td>
                 <select id="mode">
-                  <option value="firstPhotos">first in set</option>
-                  <option value="lastPhotos">last in set</option>
-                  <option value="randomPhotos">random</option>
+                  <option value="firstPhotos" title="the gadget will show first photo from the photoset">first in set</option>
+                  <option value="lastPhotos" title="the gadget will show latest photo from the photoset">last in set</option>
+                  <option value="randomPhotos" title="the gadget will show a random photo from the photoset" >random</option>
                 </select>
               </td>
             </tr>
