@@ -57,7 +57,7 @@ var size;
 function userResponse(rsp){
   if(rsp.stat == "ok"){
     var user_id = rsp.user.id;
-    console.log("user_id" + user_id);
+    console.log("user_id: " + user_id);
     flickr.getListOfSets(user_id, listOfSetsResponse);
   } else {
     alert("couldn't look up an user");
@@ -139,9 +139,10 @@ function randomPhotos(rsp){
 
 function refreshImage(){
   var imgUrl = flickr.buildImgUrl(photo, size);
-  console.log(imgUrl);
   $("#img_placeholder").attr("src", imgUrl);
   $("#img_container").attr("title", photo.title);
+
+  console.log("set title: " + photo.title + ", to >> " + $("#img_container"));
 
   //up
   $("#img_placeholder").load(function(){
