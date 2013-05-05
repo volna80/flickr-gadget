@@ -141,6 +141,7 @@ function refreshImage(){
   var imgUrl = flickr.buildImgUrl(photo, size);
   console.log(imgUrl);
   $("#img_placeholder").attr("src", imgUrl);
+  $("#img_placeholder").attr("title", photo.title);
 
   //up
   $("#img_placeholder").load(function(){
@@ -196,6 +197,7 @@ function init(){
     state.submitDelta({photo_server:photo.server});
     state.submitDelta({photo_id:photo.id});
     state.submitDelta({photo_secret:photo.secret});
+    state.submitDelta({photo_title:photo.title});
     state.submitDelta({size:size});
     state.submitDelta({mode:mode});
   });
@@ -222,6 +224,7 @@ gadgets.util.registerOnLoadHandler(function() {
         photo.farm      = state.get('photo_farm');
         photo.server    = state.get('photo_server');
         photo.secret    = state.get('photo_secret');
+        photo.title     = state.get('photo_title');
         photoset_id     = state.get("photoset_id");
         size            = state.get("size");
         mode            = state.get("mode");
