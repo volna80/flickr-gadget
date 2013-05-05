@@ -139,12 +139,9 @@ function randomPhotos(rsp){
 
 function refreshImage(){
   var imgUrl = flickr.buildImgUrl(photo, size);
+
   $("#img_placeholder").attr("src", imgUrl);
-
-  console.log("setting title to " + $("#img_container"));
   $("#img_container").attr("title", photo.title);
-
-  console.log("set title: " + photo.title + ", to >> " + $("#img_container"));
 
   //up
   $("#img_placeholder").load(function(){
