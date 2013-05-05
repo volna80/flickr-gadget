@@ -270,17 +270,18 @@ gadgets.util.registerOnLoadHandler(function() {
           <body>
 
 
-<table width="100%">
+
+ <table width="100%">
       <tr>
         <td width="50%" >
           <img id="img_placeholder" />
         </td>
         <td>
-          <table id="form" style="display:none;" >
-            <tr title="The url to the user's profile or photos page."><td>user's profile url : </td><td><input id="username" value="" /></td></tr>
-            <tr title="choose user's photoset"><td>user's photoset : </td><td><select id="sets" /><br/></td></tr>
+          <table id="form"  >
+            <tr title="The url to the user's profile or photos page." ><td align="right">user's profile url </td><td><input id="username" value="" /></td></tr>
+            <tr title="choose user's photoset" ><td align="right">user's photoset </td><td><select id="sets" /><br/></td></tr>
             <tr title="choose a photo size">
-              <td >size of a photo : </td>
+              <td align="right" > size of a photo </td>
               <td><select id="photo_size">
                 <option value="s">small square (75x75)</option>
                 <option value="q">large square (150x150)</option>
@@ -292,7 +293,7 @@ gadgets.util.registerOnLoadHandler(function() {
               </select></td>
             </tr>
             <tr>
-              <td title="set how a gadget will show photos from the photoset">mode : </td>
+              <td title="set how a gadget will show photos from the photoset" align="right">mode </td>
               <td>
                 <select id="mode">
                   <option value="firstPhotos" title="the gadget will show a first photo from the photoset">first in set</option>
