@@ -29,7 +29,7 @@
 
 <table width="100%">
       <tr>
-        <td width="50%" id="img_container">
+        <td width="50%" id="img_container" title="...">
           <img id="img_placeholder" />
         </td>
         <td>
