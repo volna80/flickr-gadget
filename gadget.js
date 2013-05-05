@@ -141,7 +141,7 @@ function refreshImage(){
   var imgUrl = flickr.buildImgUrl(photo, size);
 
   $("#img_placeholder").attr("src", imgUrl);
-  $("#img_container").attr("title", photo.title);
+  $("#img_placeholder").attr("title", photo.title);
 
   //up
   $("#img_placeholder").load(function(){
