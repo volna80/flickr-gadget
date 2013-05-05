@@ -86,6 +86,9 @@ function userResponse(rsp){
     var user_id = rsp.user.id;
     console.log("user_id: " + user_id);
     flickr.getListOfSets(user_id, listOfSetsResponse);
+
+    $("#load").removeAttr("disabled");
+
   } else {
     alert("couldn't look up an user");
     console.error(rsp);
@@ -193,6 +196,12 @@ function init(){
 
   $("#username").change(function() {
      flickr.lookupUser($("#username").attr("value"),userResponse);
+     $("#load").attr("disabled","true");
+  });
+
+  $("#load").click(function(){
+     flickr.lookupUser($("#username").attr("value"),userResponse);
+     $("#load").attr("disabled","true");
   });
 
   $("#sets").change(function(){
@@ -304,7 +313,16 @@ gadgets.util.registerOnLoadHandler(function() {
             </tr>
             <tr>
               <td colspan="2" align="right">
-                <button id="save" title="finish editing and save gadget parameters" disabled=true>save</button>
+                <table>
+                  <tr>
+                    <td>
+                      <button id="load" title="reload list of photosets for the user">refresh photosets</button>
+                    </td>
+                    <td>
+                      <button id="save" title="finish editing and save gadget parameters" disabled=true>save</button>
+                    </td>
+                  </tr>
+                </table>
               </td>
             </tr>
             <tr>
