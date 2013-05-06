@@ -290,7 +290,7 @@ gadgets.util.registerOnLoadHandler(function() {
  <table width="100%">
       <tr>
         <td width="50%" >
-          <a id="img_a"><img id="img_placeholder" /></a>
+          <a id="img_a" target="_blank"><img id="img_placeholder" /></a>
         </td>
         <td>
           <table id="form"  style="font-size:10pt; display:none;">
