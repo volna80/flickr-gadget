@@ -69,12 +69,18 @@ Flickr.prototype.buildImgUrl = function(photo, size){
   return "http://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_" + size + ".jpg";
 };
 
+Flickr.prototype.buildImgPageUrl = function(user,photo){
+  //http://www.flickr.com/photos/{user-id}/{photo-id} - individual photo
+  return "http://www.flickr.com/photos/" + user + "/" + photo.id;
+};
+
 
 //===========================================================================
 //===========================================================================
 //===========================================================================
 
 
+var user_id;
 var photo;
 var photoset_id;
 var mode;
@@ -83,7 +89,7 @@ var size;
 
 function userResponse(rsp){
   if(rsp.stat == "ok"){
-    var user_id = rsp.user.id;
+    user_id = rsp.user.id;
     console.log("user_id: " + user_id);
     flickr.getListOfSets(user_id, listOfSetsResponse);
 
@@ -172,6 +178,7 @@ function refreshImage(){
 
   $("#img_placeholder").attr("src", imgUrl);
   $("#img_placeholder").attr("title", photo.title);
+  $("#img_a").attr("href", flickr.buildImgPageUrl(user_id, photo);
 
   //up
   $("#img_placeholder").load(function(){
@@ -225,8 +232,6 @@ function init(){
 
     var state = wave.getState();
 
-    console.log("save to " + state);
-
     state.submitDelta({set:"true"});
     state.submitDelta({photoset_id: photoset_id});
     state.submitDelta({photo_farm:photo.farm});
@@ -236,6 +241,7 @@ function init(){
     state.submitDelta({photo_title:photo.title});
     state.submitDelta({size:size});
     state.submitDelta({mode:mode});
+    state.submitDelta({user_id:user_id});
   });
 
 }
@@ -264,6 +270,7 @@ gadgets.util.registerOnLoadHandler(function() {
         photoset_id     = state.get("photoset_id");
         size            = state.get("size");
         mode            = state.get("mode");
+        user_id         = state.get("user_id");
         recalc();
 
       } else {
@@ -283,7 +290,7 @@ gadgets.util.registerOnLoadHandler(function() {
  <table width="100%">
       <tr>
         <td width="50%" >
-          <img id="img_placeholder" />
+          <a id="img_a"><img id="img_placeholder" /></a>
         </td>
         <td>
           <table id="form"  style="font-size:10pt; display:none;">
