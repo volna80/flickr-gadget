@@ -333,7 +333,7 @@ gadgets.util.registerOnLoadHandler(function() {
               </td>
             </tr>
             <tr>
-              <td colspan="2" align="right" style="font-size:8pt;">v.1.1</td>
+              <td colspan="2" align="right" style="font-size:8pt;">v.1.2</td>
             </tr>
           </table>
         </td>
