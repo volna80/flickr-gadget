@@ -178,7 +178,7 @@ function refreshImage(){
 
   $("#img_placeholder").attr("src", imgUrl);
   $("#img_placeholder").attr("title", photo.title);
-  $("#img_a").attr("href", flickr.buildImgPageUrl(user_id, photo);
+  $("#img_a").attr("href", flickr.buildImgPageUrl(user_id, photo));
 
   //up
   $("#img_placeholder").load(function(){
