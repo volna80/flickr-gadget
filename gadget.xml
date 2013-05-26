@@ -327,7 +327,7 @@ gadgets.util.registerOnLoadHandler(function() {
         <td>
 
 
-        <table class="form_container" width="100%" ><tr><td>
+        <table class="form_container" width="100%" ><tr><td align="center" valign="middle">
 
 
           <table id="form"  class="form_table" align="center" >
