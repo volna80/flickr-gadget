@@ -330,7 +330,7 @@ gadgets.util.registerOnLoadHandler(function() {
         <table class="form_container" width="100%" ><tr><td>
 
 
-          <table id="form"  class="form_table" >
+          <table id="form"  class="form_table" align="center" >
             <tr title="The url to the user's profile or photos page" ><td align="right" class="field_title">user's profile url </td><td class="field_value"><input id="username" value="http://www.flickr.com/photos/nasacommons/"  size="39" /></td></tr>
             <tr title="choose user's photoset" ><td align="right" class="field_title">user's photoset </td><td class="field_value"><select id="sets" /><br/></td></tr>
             <tr title="choose a photo size">
